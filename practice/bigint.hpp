@@ -7,49 +7,49 @@
 #include <cstdlib>
 
 
-class Bigint {
+class bigint {
 private:
   std::string str;
 
 public:
-  Bigint();
-  Bigint(const Bigint& other);
-  Bigint(unsigned int n);
-  Bigint& operator=(const Bigint& other);
-  ~Bigint();
+  bigint();
+  bigint(const bigint& other);
+  bigint(unsigned int n);
+  bigint& operator=(const bigint& other);
+  ~bigint();
 
   std::string getStr() const;
 
   // addition
-  Bigint operator+(const Bigint& other) const;
-  Bigint& operator+=(const Bigint& other);
+  bigint operator+(const bigint& other) const;
+  bigint& operator+=(const bigint& other);
 
   // increment
-  Bigint& operator++();
-  Bigint operator++(int);
+  bigint& operator++();
+  bigint operator++(int);
 
   // shift with num
-  Bigint operator<<(unsigned int num) const;
-  Bigint operator>>(unsigned int num) const;
-  Bigint& operator<<=(unsigned int num);
-  Bigint& operator>>=(unsigned int num);
+  bigint operator<<(unsigned int num) const;
+  bigint operator>>(unsigned int num) const;
+  bigint& operator<<=(unsigned int num);
+  bigint& operator>>=(unsigned int num);
 
   //shift with object
-  Bigint operator>>(const Bigint& other) const;
-  Bigint operator<<(const Bigint& other) const;
-  Bigint& operator>>=(const Bigint& other);
-  Bigint& operator<<=(const Bigint& other);
+  bigint operator>>(const bigint& other) const;
+  bigint operator<<(const bigint& other) const;
+  bigint& operator>>=(const bigint& other);
+  bigint& operator<<=(const bigint& other);
 
   // != | == | < | > | <= | >=
-  bool operator!=(const Bigint& other) const;
-  bool operator==(const Bigint& other) const;
-  bool operator<(const Bigint& other) const;
-  bool operator>(const Bigint& other) const;
-  bool operator<=(const Bigint& other) const;
-  bool operator>=(const Bigint& other) const;
+  bool operator!=(const bigint& other) const;
+  bool operator==(const bigint& other) const;
+  bool operator<(const bigint& other) const;
+  bool operator>(const bigint& other) const;
+  bool operator<=(const bigint& other) const;
+  bool operator>=(const bigint& other) const;
 
 };
 
-std::ostream& operator<<(std::ostream& output, const Bigint& obj);
+std::ostream& operator<<(std::ostream& output, const bigint& obj);
 
 #endif // !BIGINT_HPP
