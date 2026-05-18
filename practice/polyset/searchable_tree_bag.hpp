@@ -1,9 +1,9 @@
 #pragma once
 
-#include "tree_bag.hpp"
 #include "searchable_bag.hpp"
+#include "tree_bag.hpp"
 
-class saerchable_tree_bag : public tree_bag, public searchable_bag {
+class searchable_tree_bag : public tree_bag, public searchable_bag {
   private:
     bool search(node* node, const int value) const;
   public:
@@ -13,4 +13,4 @@ class saerchable_tree_bag : public tree_bag, public searchable_bag {
     ~searchable_tree_bag();
 
     bool has(int) const;
-}
+};
