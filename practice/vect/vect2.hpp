@@ -38,11 +38,11 @@ class vect2 {
     vect2& operator--();
     vect2 operator--(int);
 
-    bool operator==(const vect2& other) const;
-    bool operator!=(const vect2& other) const;
-}
+    bool operator==(const vect2& other);
+    bool operator!=(const vect2& other);
+};
 
 vect2 operator*(int num, const vect2& other);
-std::ostream& operator<<(std::ostream& os, const vect2& other);
+std::ostream& operator<<(std::ostream& os, const vect2& ohter);
 
 #endif // !VECT2j
