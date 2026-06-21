@@ -18,12 +18,13 @@ class vect2 {
     ~vect2();
 
     int operator[](int index) const;
-    int& operator[](int index);
+    int&  operator[](int index);
 
     vect2 operator-() const;
     vect2 operator*(int num) const;
 
     vect2& operator*=(int num);
+
 
     vect2 operator-(const vect2& other) const;
     vect2 operator+(const vect2& other) const;
@@ -43,6 +44,6 @@ class vect2 {
 };
 
 vect2 operator*(int num, const vect2& other);
-std::ostream& operator<<(std::ostream& os, const vect2& ohter);
+std::ostream& operator<<(std::ostream& os, const vect2& other);
 
 #endif // !VECT2j

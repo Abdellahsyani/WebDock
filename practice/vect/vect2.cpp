@@ -21,8 +21,8 @@ vect2::~vect2() {}
 
 int vect2::operator[](int index) const {
   if (index == 0)
-    return this->x;
-  return this->y;
+    return x;
+  return y;
 }
 
 int& vect2::operator[](int index) {
@@ -32,21 +32,21 @@ int& vect2::operator[](int index) {
 }
 
 vect2 vect2::operator-() const {
-  vect2 tmp;
-
-  tmp.x = -this->x;
-  tmp.y = -this->y;
+  vect2 tmp = *this;
+  tmp[0] = -tmp[0];
+  tmp[1] = -tmp[1];
   return tmp;
 }
 
 vect2 vect2::operator*(int num) const {
-  vect2 tmp;
-  tmp.x = this->x * num;
-  tmp.y = this->y * num;
+  vect2 tmp = *this;
+  tmp.x *= num;
+  tmp.y *= num;
   return tmp;
 }
 
 vect2& vect2::operator*=(int num) {
+  vect2 tmp = *this;
   this->x *= num;
   this->y *= num;
   return *this;
@@ -55,42 +55,39 @@ vect2& vect2::operator*=(int num) {
 vect2 vect2::operator-(const vect2& other) const {
   vect2 tmp = *this;
   tmp.x -= other.x;
-  tmp.y -= other.y;
+  tmp.y -= other.x;
   return tmp;
 }
 
 vect2 vect2::operator+(const vect2& other) const {
   vect2 tmp = *this;
   tmp.x += other.x;
-  tmp.y += other.y;
+  tmp.y += other.x;
   return tmp;
 }
 
 vect2 vect2::operator*(const vect2& other) const {
   vect2 tmp = *this;
   tmp.x *= other.x;
-  tmp.y *= other.y;
+  tmp.y *= other.x;
   return tmp;
 }
 
 vect2& vect2::operator-=(const vect2& other) {
   this->x -= other.x;
-  this->y -= other.y;
-
+  this->y -= other.x;
   return *this;
 }
 
 vect2& vect2::operator+=(const vect2& other) {
   this->x += other.x;
-  this->y += other.y;
-
+  this->y += other.x;
   return *this;
 }
 
 vect2& vect2::operator*=(const vect2& other) {
   this->x *= other.x;
-  this->y *= other.y;
-
+  this->y *= other.x;
   return *this;
 }
 
@@ -102,19 +99,21 @@ vect2& vect2::operator++() {
 
 vect2 vect2::operator++(int) {
   vect2 tmp = *this;
-  ++(*this);
+  this->x += 1;
+  this->y += 1;
   return tmp;
 }
 
 vect2& vect2::operator--() {
-  this->x -= 1;
-  this->y -= 1;
+  this->x += 1;
+  this->y += 1;
   return *this;
 }
 
 vect2 vect2::operator--(int) {
   vect2 tmp = *this;
-  --(*this);
+  this->x += 1;
+  this->y += 1;
   return tmp;
 }
 
