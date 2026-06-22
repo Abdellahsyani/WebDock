@@ -5,7 +5,7 @@
 
 class searchable_tree_bag : public tree_bag, public searchable_bag {
   private:
-     bool search(node *node, const int value) const;
+    bool search(node *date, const int value) const;
   public:
     searchable_tree_bag();
     searchable_tree_bag(const searchable_tree_bag& other);
@@ -13,5 +13,5 @@ class searchable_tree_bag : public tree_bag, public searchable_bag {
     ~searchable_tree_bag();
 
     bool has(int) const;
-};
+}
 
