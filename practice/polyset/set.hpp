@@ -14,7 +14,7 @@ class set {
 
     bool has(int) const;
     void insert(int);
-    void isnert(int*, int);
+    void insert(int*, int);
     void print() const;
     void clear();
 

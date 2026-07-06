@@ -13,5 +13,5 @@ class searchable_tree_bag : public tree_bag, public searchable_bag {
     ~searchable_tree_bag();
 
     bool has(int) const;
-}
+};
 

@@ -11,7 +11,7 @@ void set::insert(int value) {
     bag.insert(value);
 }
 
-void set::insert(int* date, int size) {
+void set::insert(int* data, int size) {
   for (int i = 0; i < size; i++)
   {
     this->insert(data[i]);
@@ -19,7 +19,7 @@ void set::insert(int* date, int size) {
 }
 
 void set::print() const {
-  bag.print()
+  bag.print();
 }
 
 void set::clear() {

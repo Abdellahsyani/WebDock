@@ -46,7 +46,6 @@ vect2 vect2::operator*(int num) const {
 }
 
 vect2& vect2::operator*=(int num) {
-  vect2 tmp = *this;
   this->x *= num;
   this->y *= num;
   return *this;

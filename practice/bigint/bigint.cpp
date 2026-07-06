@@ -90,6 +90,8 @@ bigint& bigint::operator+=(const bigint& other) {
   return *this;
 }
 
+//233  << 5
+//
 bigint& bigint::operator++() {
   (*this) = (*this) + bigint(1);
   return *this;
