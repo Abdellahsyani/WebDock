@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Navigate to the working directory we set in the Dockerfile
+cd /var/www/html/wordpress
+
+# Check if WordPress is already installed to prevent reinstalling on every container restart
+if [ ! -f "wp-config.php" ]; then
+    echo "WordPress configuration not found. Starting setup..."
+
+    # 1. Download the latest WordPress core files
+    wp core download --allow-root
+
+    # 2. Wait for the MariaDB container to be fully ready
+    # This prevents the classic Inception race condition where WordPress tries to connect 
+    # to the database before MariaDB has finished its own initialization.
+    echo "Waiting for MariaDB to start..."
+    while ! mariadb -h$SQL_HOST -u$SQL_USER -p$SQL_PASSWORD $SQL_DATABASE &>/dev/null; do
+        echo "Database is not ready yet. Retrying in 3 seconds..."
+        sleep 3
+    done
+    echo "MariaDB is up and running!"
+
+    # 3. Create the wp-config.php file using credentials from your .env file
+    wp config create --allow-root \
+        --dbname=$SQL_DATABASE \
+        --dbuser=$SQL_USER \
+        --dbpass=$SQL_PASSWORD \
+        --dbhost=$SQL_HOST \
+        --path='/var/www/html/wordpress'
+
+    # 4. Install WordPress and set up the admin user
+    wp core install --allow-root \
+        --url=$DOMAIN_NAME \
+        --title="$SITE_TITLE" \
+        --admin_user=$ADMIN_USER \
+        --admin_password=$ADMIN_PASSWORD \
+        --admin_email=$ADMIN_EMAIL
+
+    # 5. Create a standard second user (This is a strict requirement in the Inception subject)
+    wp user create --allow-root \
+        $USER_LOGIN \
+        $USER_EMAIL \
+        --user_pass=$USER_PASSWORD \
+        --role=author
+
+    echo "WordPress setup completed successfully!"
+else
+    echo "WordPress is already configured."
+fi
+
+# 6. Hand over control to PHP-FPM
+# The 'exec' command replaces the current bash process (PID 1) with the php-fpm process
+echo "Starting PHP-FPM..."
+exec /usr/sbin/php-fpm8.2 -F
