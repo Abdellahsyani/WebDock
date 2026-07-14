@@ -6,7 +6,7 @@
 int main(int ac, char **av) {
   if (ac != 4)
     return 1;
-
+  
   int w = atoi(av[1]), h = atoi(av[2]), it = atoi(av[3]);
   if (w <= 0 || h <= 0 || it < 0)
     return 1;
@@ -21,8 +21,8 @@ int main(int ac, char **av) {
 
   int x = 0, y = 0;
   bool pen = false;
-  char c;
 
+  char c;
   while (read(0, &c, 1) == 1) {
     if (c == 'w' && y > 0)
       y--;
@@ -34,7 +34,6 @@ int main(int ac, char **av) {
       x++;
     else if (c == 'x')
       pen = !pen;
-
     if (pen)
       board[y][x] = 1;
   }
@@ -55,10 +54,13 @@ int main(int ac, char **av) {
           tmp[y][x] = 1;
         else if (!board[y][x] && (nb == 3))
           tmp[y][x] = 1;
+        // else {
+        //   tmp[y][x] =  0;
+        // }
       }
     }
     for (int y = 0; y < h; y++) {
-      for (int x = 0; x < w; x++){
+      for (int x = 0; x < w; x++) {
         board[y][x] = tmp[y][x];
       }
     }
