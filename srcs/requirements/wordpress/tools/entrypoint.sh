@@ -31,16 +31,16 @@ if [ ! -f "wp-config.php" ]; then
     # 4. Install WordPress and set up the admin user
     wp core install --allow-root \
         --url=$DOMAIN_NAME \
-        --title="$SITE_TITLE" \
-        --admin_user=$ADMIN_USER \
-        --admin_password=$ADMIN_PASSWORD \
-        --admin_email=$ADMIN_EMAIL
+        --title="$WP_TITLE" \
+        --admin_user=$WP_ADMIN_USER \
+        --admin_password=$WP_ADMIN_PASSWORD \
+        --admin_email=$WP_ADMIN_EMAIL
 
     # 5. Create a standard second user (This is a strict requirement in the Inception subject)
     wp user create --allow-root \
-        $USER_LOGIN \
-        $USER_EMAIL \
-        --user_pass=$USER_PASSWORD \
+        $WP_USER \
+        $WP_USER_EMAIL \
+        --user_pass=$WP_USER_PASSWORD \
         --role=author
 
     echo "WordPress setup completed successfully!"
