@@ -22,9 +22,9 @@ RUN mkdir -p /run/php /var/www/html/wordpress
 RUN chown -R www-data:www-data /var/www/html/wordpress
 
 # Copy our custom configurations into the container
-# COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
-RUN sed -i 's|listen = /run/php/php8.2-fpm.sock|listen = 9000|g' /etc/php/8.2/fpm/pool.d/www.conf
-RUN echo "clear_env = no" >> /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+# RUN sed -i 's|listen = /run/php/php8.2-fpm.sock|listen = 9000|g' /etc/php/8.2/fpm/pool.d/www.conf
+# RUN echo "clear_env = no" >> /etc/php/8.2/fpm/pool.d/www.conf
 COPY ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 # Make sure the entrypoint script is executable

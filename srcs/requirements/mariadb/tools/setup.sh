@@ -1,27 +1,30 @@
 #!/bin/bash
 
-# Start the MariaDB service in the background temporarily
-service mariadb start 
+# 1. Check if the physical database folder exists
+if [ ! -d "/var/lib/mysql/$SQL_DATABASE" ]; then
+    echo "Database not found. Initializing..."
 
-# Wait a few seconds for the database to fully boot up
-sleep 5
+    # Start MariaDB in the background temporarily
+    mysqld_safe &
 
-# Check if the database folder already exists on the hard drive
-if [ ! -d "/var/lib/mysql/${SQL_DATABASE}" ]; then
-    echo "Initializing database for the first time..."
-    mariadb -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
-    mariadb -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"
-    mariadb -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
-    mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
-    mariadb -e "FLUSH PRIVILEGES;"
+    # Wait a few seconds for the background process to fully boot
+    sleep 5
+
+    # Run the setup commands (no password needed because root has no password yet!)
+    mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
+    mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"
+    mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
+    mysql -e "FLUSH PRIVILEGES;"
+
+    # Gracefully shut down the background process using the NEW root password
+    mysqladmin -u root -p"${SQL_ROOT_PASSWORD}" shutdown
+
     echo "Database initialization complete."
 else
     echo "Database already exists. Skipping initialization."
 fi
 
-# Shut down the background service cleanly
-mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
-
-# Start MariaDB in the foreground (PID 1) to keep the container alive
-echo "MariaDB is starting in the foreground..."
+# 2. Hand over PID 1 to MariaDB in the foreground
+echo "Starting MariaDB database server..."
 exec mysqld_safe
