@@ -57,6 +57,15 @@ services:
     networks:
         - inception_net
 
+  static_website:
+    build:
+      context: ./requirements/bonus/static_website
+      dockerfile: Dockerfile
+    container_name: static_website
+    restart: always
+    networks:
+        - inception_net
+
 volumes:
     db_data:
       driver: local

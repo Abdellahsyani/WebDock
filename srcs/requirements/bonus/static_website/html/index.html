@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdellah Syani | Terminal</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="terminal-container">
+      <header class="terminal-header">
+        <div class="traffic-lights">
+          <span class="light red"></span>
+          <span class="light yellow"></span>
+          <span class="light green"></span>
+        </div>
+        <div class="header-title">abdo@inception: ~</div>
+      </header>
+
+      <main class="terminal-body">
+        <section class="intro">
+          <p class="prompt">
+            <span class="user">abdo@inception</span>:<span class="dir">~</span>$
+            whoami
+          </p>
+          <p class="output">Abdellah Syani</p>
+
+          <p class="prompt">
+            <span class="user">abdo@inception</span>:<span class="dir">~</span>$
+            cat profile.txt
+          </p>
+          <p class="output typing-effect" id="typewriter"></p>
+        </section>
+
+        <section class="projects">
+          <p class="prompt">
+            <span class="user">abdo@inception</span>:<span class="dir"
+              >~/projects</span
+            >$ ls -l
+          </p>
+          <div class="output project-list">
+            <div class="project-item">
+              <strong>drwxr-xr-x</strong> <span>minishell</span>
+              <p class="project-desc">
+                A Unix command interpreter written in C. Features process
+                creation, signal handling, and POSIX system programming.
+              </p>
+            </div>
+            <div class="project-item">
+              <strong>drwxr-xr-x</strong> <span>cub3d</span>
+              <p class="project-desc">
+                A 3D ray-casting rendering engine built in C, involving advanced
+                math and direct memory manipulation.
+              </p>
+            </div>
+            <div class="project-item">
+              <strong>drwxr-xr-x</strong> <span>airbnb_clone</span>
+              <p class="project-desc">
+                Full-stack platform built with Python, TypeScript, Flask, and
+                SQL.
+              </p>
+            </div>
+            <div class="project-item">
+              <strong>drwxr-xr-x</strong> <span>rest_api</span>
+              <p class="project-desc">
+                Backend infrastructure handling structured data routing and
+                request management.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
