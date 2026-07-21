@@ -57,6 +57,17 @@ services:
     networks:
         - inception_net
 
+  ftp_server:
+    build:
+      context: ./requirements/bonus/ftp_server
+      dockerfile: Dockerfile
+    container_name: ftp_server
+    restart: always
+    depends_on:
+      - wordpress
+    networks:
+        - inception_net
+
   static_website:
     build:
       context: ./requirements/bonus/static_website
