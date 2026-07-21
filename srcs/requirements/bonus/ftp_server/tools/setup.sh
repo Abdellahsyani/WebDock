@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FTP_PASS=$(cat /run/secrets/ftp_password)
+
 # Check if the user already exists to avoid errors on container restart
 if ! id "$FTP_USER" &>/dev/null; then
     echo "Creating FTP user: $FTP_USER"
