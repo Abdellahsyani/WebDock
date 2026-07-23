@@ -47,6 +47,19 @@ if [ ! -f "wp-config.php" ]; then
         --user_pass=$WP_USER_PASSWORD \
         --role=author
 
+    # 6. Cofigure Redis Object Cache
+    echo "Starting up Redis caching...."
+
+    # Inject the redis container's hostname and port into wp-config.php
+    wp config set WP_REDIS_HOST 'redis' --allow-root
+    wp config set WP_REDIS_PORT 6379  --raw --allow-root
+
+    # Download adn activate the redis object cache plugins
+    wp plugin install  redis-cache --activate --allow-root
+
+    # turn the caching engine on
+    wp redis enable --allow-root
+
     echo "WordPress setup completed successfully!"
 else
     echo "WordPress is already configured."

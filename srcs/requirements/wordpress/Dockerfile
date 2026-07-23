@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     php8.2-fpm \
     php8.2-mysql \
     mariadb-client \
+    php-redis \
     curl \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
