@@ -26,6 +26,7 @@ services:
     restart: always
     depends_on:
       - mariadb
+      - redis
     env_file:
       - .env
     secrets:
