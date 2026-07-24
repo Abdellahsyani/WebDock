@@ -118,6 +118,21 @@ services:
     networks:
         - inception_net
 
+  # portainer 
+  portainer:
+    build:
+      context: ./requirements/bonus/portainer
+      dockerfile: Dockerfile
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - inception_net
+
 volumes:
     db_data:
       driver: local
@@ -131,6 +146,7 @@ volumes:
           type: none
           o: bind
           device: /home/abdellah/data/wordpress
+    portainer_data:
 
 secrets:
   db_password:
