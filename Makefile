@@ -12,3 +12,14 @@ setup:
 down:
 	docker compose -f $(COMPOSE_FILE) down
 
+clean: down
+	docker system prune -a --force
+
+fclean: clean
+	docker compose -f $(COMPOSE_FILE) down -v -rmi all
+	sudo rm -rf $(DATA_PATH)/mariadb
+	sudo rm -rf $(DATA_PATH)/wordpress
+
+re: fclean all
+
+.PHONY: all setup down clean fclean re
