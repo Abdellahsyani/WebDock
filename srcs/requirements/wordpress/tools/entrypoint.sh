@@ -11,7 +11,8 @@ cd /var/www/html/wordpress
 if [ ! -f "wp-config.php" ]; then
     echo "WordPress configuration not found. Starting setup..."
 
-    # 1. Download the latest WordPress core files
+    # Download the latest WordPress core files
+    # --allow-root: 
     wp core download --allow-root
 
     # 2. Wait for the MariaDB container to be fully ready
@@ -54,7 +55,7 @@ if [ ! -f "wp-config.php" ]; then
     wp config set WP_REDIS_HOST 'redis' --allow-root
     wp config set WP_REDIS_PORT 6379  --raw --allow-root
 
-    # Download adn activate the redis object cache plugins
+    # Download and activate the redis object cache plugins
     wp plugin install  redis-cache --activate --allow-root
 
     # turn the caching engine on
