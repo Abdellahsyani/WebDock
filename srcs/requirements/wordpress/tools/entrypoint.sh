@@ -66,7 +66,7 @@ else
 fi
 
 # Always (re)apply permalinks — idempotent, no need for a check.
-wp rewrite structure '/%postname%/' --hard --allow-root
+wp rewrite structure '/%postname%/' --allow-root
 wp rewrite flush --hard --allow-root
 
 # 6. Hand over control to PHP-FPM
