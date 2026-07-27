@@ -16,7 +16,7 @@ clean: down
 	docker system prune -a --force
 
 fclean: clean
-	docker compose -f $(COMPOSE_FILE) down -v -rmi all
+	docker compose -f $(COMPOSE_FILE) down -v --rmi all
 	sudo rm -rf $(DATA_PATH)/mariadb
 	sudo rm -rf $(DATA_PATH)/wordpress
 
