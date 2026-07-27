@@ -34,14 +34,11 @@ if [ ! -f "wp-config.php" ]; then
 
     # 4. Install WordPress and set up the admin user
     wp core install --allow-root \
-        --url=$DOMAIN_NAME \
+        --url="https://$DOMAIN_NAME" \
         --title="$WP_TITLE" \
         --admin_user=$WP_ADMIN_USER \
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL
-
-    wp option update permalink_structure '/%postname%/' --allow-root
-    wp rewrite flush --allow-root
 
     # 5. Create a standard second user (This is a strict requirement in the Inception subject)
     wp user create --allow-root \
@@ -67,6 +64,10 @@ if [ ! -f "wp-config.php" ]; then
 else
     echo "WordPress is already configured."
 fi
+
+# Always (re)apply permalinks — idempotent, no need for a check.
+wp rewrite structure '/%postname%/' --hard --allow-root
+wp rewrite flush --hard --allow-root
 
 # 6. Hand over control to PHP-FPM
 # The 'exec' command replaces the current bash process (PID 1) with the php-fpm process
