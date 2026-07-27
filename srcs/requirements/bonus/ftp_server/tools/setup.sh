@@ -7,6 +7,9 @@ if ! id "$FTP_USER" &>/dev/null; then
     echo "Creating FTP user: $FTP_USER"
     
     # Create the user and set their home directory to the shared volume
+    # -m: this make a new home (make-home) change the real home to /var/www/html
+    # -d: specify the home directory
+    # -s: assign the default login way
     useradd -m -d /var/www/html -s /bin/bash "$FTP_USER"
     
     # Set the password using the environment variable
@@ -16,7 +19,8 @@ if ! id "$FTP_USER" &>/dev/null; then
     usermod -aG www-data "$FTP_USER"
     
     # Give ownership of the folder to the FTP user
-    chown -R "$FTP_USER":"$FTP_USER" /var/www/html
+    chown -R "$FTP_USER":www-data /var/www/html
+    find /var/www/html -type d -exec chmod 775 {} \;
 fi
 
 # Ensure the secure empty directory vsftpd needs exists

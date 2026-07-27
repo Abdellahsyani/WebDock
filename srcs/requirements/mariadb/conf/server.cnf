@@ -1,4 +1,5 @@
 [mysqld]
+
 # Store database files in the default location
 datadir = /var/lib/mysql
 

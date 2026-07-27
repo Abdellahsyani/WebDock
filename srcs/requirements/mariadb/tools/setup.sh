@@ -7,7 +7,7 @@ SQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 if [ ! -d "/var/lib/mysql/$SQL_DATABASE" ]; then
     echo "Database not found. Initializing..."
 
-    # Start MariaDB in the background temporarily
+    # Start MariaDB in the background temporary (& run in the background)
     mysqld_safe &
 
     # Wait a few seconds for the background process to fully boot
