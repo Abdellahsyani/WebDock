@@ -12,7 +12,7 @@ if [ ! -f "wp-config.php" ]; then
     echo "WordPress configuration not found. Starting setup..."
 
     # Download the latest WordPress core files
-    # --allow-root: 
+    # --allow-root: force executing command by using linux user
     wp core download --allow-root
 
     # 2. Wait for the MariaDB container to be fully ready

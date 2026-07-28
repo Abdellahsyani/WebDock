@@ -20,6 +20,8 @@ if ! id "$FTP_USER" &>/dev/null; then
     
     # Give ownership of the folder to the FTP user
     chown -R "$FTP_USER":www-data /var/www/html
+
+    # give permission for uploaded file from ftp_server to read them from nginx
     find /var/www/html -type d -exec chmod 775 {} \;
 fi
 
