@@ -65,9 +65,13 @@ else
     echo "WordPress is already configured."
 fi
 
-# Always (re)apply permalinks — idempotent, no need for a check.
+# wp rewrite structure:  this is the specific WP-CLi command to change how wordpress generate URLs
+# postname:  tells wordpress to generate a simple URLs
+# --allow-root:  force wordpress to apply this even we use linux user
 wp rewrite structure '/%postname%/' --allow-root
-wp rewrite flush --hard --allow-root
+
+# apply the changes to wordpress and database
+wp rewrite flush --allow-root
 
 # 6. Hand over control to PHP-FPM
 # The 'exec' command replaces the current bash process (PID 1) with the php-fpm process
