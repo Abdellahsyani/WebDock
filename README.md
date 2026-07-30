@@ -9,20 +9,20 @@ It is designed to provide a reproducible local/server environment where each ser
 ## 📚 Documentation & Deep Dives
 
 ### 1. Introduction
-- [Project Overview](./docs/index.html)
-- [The Development Journey](./docs/the-journey.html)
+- [Project Overview](https://abdellahsyani.github.io/WebDock/index.html)
+- [The Development Journey](https://abdellahsyani.github.io/WebDock/the-journey.html)
 
 ### 2. Core Docker Concepts
-- [Docker Foundations](./docs/foundations.html)
-- [Kernel Isolation: How Containers Actually Work](./docs/kernel-isolation.html)
+- [Docker Foundations](https://abdellahsyani.github.io/WebDock/foundations.html)
+- [Kernel Isolation: How Containers Actually Work](https://abdellahsyani.github.io/WebDock/kernel-isolation.html)
 
 ### 3. Infrastructure Design
-- [System Architecture](./docs/architecture.html)
-- [Network Virtualization & DNS](./docs/networking.html)
-- [Orchestration with Docker Compose](./docs/orchestration.html)
+- [System Architecture](https://abdellahsyani.github.io/WebDock/architecture.html)
+- [Network Virtualization & DNS](https://abdellahsyani.github.io/WebDock/networking.html)
+- [Orchestration with Docker Compose](https://abdellahsyani.github.io/WebDock/orchestration.html)
 
 ### 4. Operations
-- [Security & Best Practices](./docs/best-practices.html)
+- [Security & Best Practices](https://abdellahsyani.github.io/WebDock/best-practices.html)
 
 
 ## Overview
