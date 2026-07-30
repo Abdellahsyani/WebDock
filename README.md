@@ -6,19 +6,24 @@ It is designed to provide a reproducible local/server environment where each ser
 > Repository: `Abdellahsyani/WebDock`  
 > Description: *host many services by using containers*
 
-## Table of Contents
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [How It Works](#how-it-works)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
-- [Make Commands](#make-commands)
-- [Operations Guide](#operations-guide)
-- [Troubleshooting](#troubleshooting)
-- [Security & Best Practices](#security--best-practices)
-- [Contributing](#contributing)
-- [Documentation](#documentation)
+## 📚 Documentation & Deep Dives
+
+### 1. Introduction
+- [Project Overview](./docs/index.html)
+- [The Development Journey](./docs/the-journey.html)
+
+### 2. Core Docker Concepts
+- [Docker Foundations](./docs/foundations.html)
+- [Kernel Isolation: How Containers Actually Work](./docs/kernel-isolation.html)
+
+### 3. Infrastructure Design
+- [System Architecture](./docs/architecture.html)
+- [Network Virtualization & DNS](./docs/networking.html)
+- [Orchestration with Docker Compose](./docs/orchestration.html)
+
+### 4. Operations
+- [Security & Best Practices](./docs/best-practices.html)
+
 
 ## Overview
 WebDock packages a complete multi-service stack into containers so that setup is simple and consistent across machines.
