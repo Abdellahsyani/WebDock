@@ -12,10 +12,10 @@ setup:
 down:
 	docker compose -f $(COMPOSE_FILE) down
 
-clean: down
-	docker system prune -a --force
+clean:
+	docker compsoe -f $(COMPOSE_FILE) down
 
-fclean: clean
+fclean:
 	docker compose -f $(COMPOSE_FILE) down -v --rmi all
 	sudo rm -rf $(DATA_PATH)/mariadb
 	sudo rm -rf $(DATA_PATH)/wordpress
