@@ -5,6 +5,8 @@ services:
     build:
       context: ./requirements/mariadb 
       dockerfile: Dockerfile
+    image: mariadb
+    pull_policy: never
     container_name: mariadb
     restart: always
     env_file:
@@ -22,6 +24,8 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
+    image: wordpress
+    pull_policy: never
     container_name: wordpress
     restart: always
     depends_on:
@@ -43,6 +47,8 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
+    image: nginx
+    pull_policy: never
     container_name: nginx
     restart: always
     depends_on:
@@ -70,6 +76,7 @@ services:
     build:
       context: ./requirements/bonus/adminer
       dockerfile: Dockerfile
+    image: adminer
     container_name: adminer
     restart: always
     depends_on:
@@ -82,6 +89,7 @@ services:
     build:
       context: ./requirements/bonus/ftp_server
       dockerfile: Dockerfile
+    image: ftp_server
     container_name: ftp_server
     restart: always
     depends_on:
@@ -103,6 +111,7 @@ services:
     build:
       context: ./requirements/bonus/static_website
       dockerfile: Dockerfile
+    image: static_website
     container_name: static_website
     restart: always
     networks:
@@ -113,6 +122,7 @@ services:
     build:
       context: ./requirements/bonus/redis
       dockerfile: Dockerfile
+    image: redis
     container_name: redis
     restart: always
     networks:
@@ -123,6 +133,7 @@ services:
     build:
       context: ./requirements/bonus/portainer
       dockerfile: Dockerfile
+    image: portainer
     container_name: portainer
     restart: always
     ports:
