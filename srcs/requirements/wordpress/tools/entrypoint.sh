@@ -21,7 +21,7 @@ if [ ! -f "wp-config.php" ]; then
     # This prevents the classic Inception race condition where WordPress tries to connect 
     # to the database before MariaDB has finished its own initialization.
     echo "Waiting for MariaDB to start..."
-    while ! mariadb -h$SQL_HOST -u$SQL_USER -p$SQL_PASSWORD $SQL_DATABASE &>/dev/null; do
+    while ! mariadb -h$SQL_HOST -P 3306 -u$SQL_USER -p$SQL_PASSWORD $SQL_DATABASE &>/dev/null; do
         echo "Database is not ready yet. Retrying in 3 seconds..."
         sleep 3
     done
@@ -32,15 +32,19 @@ if [ ! -f "wp-config.php" ]; then
         --dbname=$SQL_DATABASE \
         --dbuser=$SQL_USER \
         --dbpass=$SQL_PASSWORD \
-        --dbhost=$SQL_HOST \
+        --dbhost="$SQL_HOST:3306" \
+
+    # wp config set WP_HOME "https://$DOMAIN_NAME:1000" --allow-root
+    # wp config set WP_SITEURL "https://$DOMAIN_NAME:1000" --allow-root
 
     # 4. Install WordPress and set up the admin user
     wp core install --allow-root \
-        --url="https://$DOMAIN_NAME" \
+      --url="https://$DOMAIN_NAME" \
         --title="$WP_TITLE" \
         --admin_user=$WP_ADMIN_USER \
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL
+
 
     # 5. Create a standard second user (This is a strict requirement in the Inception subject)
     wp user create --allow-root \
@@ -77,5 +81,8 @@ wp rewrite flush --allow-root
 
 # 6. Hand over control to PHP-FPM
 # The 'exec' command replaces the current bash process (PID 1) with the php-fpm process
+wp option update siteurl "https://$DOMAIN_NAME:1000" --allow-root
+wp option update home "https://$DOMAIN_NAME:1000" --allow-root
+chown -R www-data:www-data /var/www/html/wordpress
 echo "Starting PHP-FPM..."
 exec /usr/sbin/php-fpm8.2 -F
