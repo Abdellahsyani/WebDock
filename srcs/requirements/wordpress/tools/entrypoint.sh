@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 SQL_PASSWORD=$(cat /run/secrets/db_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
 WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
@@ -23,7 +21,7 @@ if [ ! -f "wp-config.php" ]; then
     echo "Waiting for MariaDB to start..."
     while ! mariadb -h$SQL_HOST -P 3306 -u$SQL_USER -p$SQL_PASSWORD $SQL_DATABASE &>/dev/null; do
         echo "Database is not ready yet. Retrying in 3 seconds..."
-        sleep 3
+        sleep 1
     done
     echo "MariaDB is up and running!"
 
@@ -81,8 +79,9 @@ wp rewrite flush --allow-root
 
 # 6. Hand over control to PHP-FPM
 # The 'exec' command replaces the current bash process (PID 1) with the php-fpm process
-wp option update siteurl "https://$DOMAIN_NAME:1000" --allow-root
-wp option update home "https://$DOMAIN_NAME:1000" --allow-root
+# wp option update siteurl "https://$DOMAIN_NAME:400" --allow-root
+# wp option update home "https://$DOMAIN_NAME:400" --allow-root
+
 chown -R www-data:www-data /var/www/html/wordpress
 echo "Starting PHP-FPM..."
 exec /usr/sbin/php-fpm8.2 -F
